@@ -64,7 +64,7 @@ function displayResults(errors) {
         const audioUrl = (error.audio && error.audio !== "def" && error.audio.trim() !== '') ? error.audio : null;
         const videoUrl = (typeof error.video === 'string' && error.video.includes('http')) ? error.video.trim() : null;
 
-        const displayCost = (error.estimatedCost === "def" || !error.estimatedCost) ? "---" : error.estimatedCost;
+        const displayCost = (error.estimatedCost === "def" || !error.estimatedCost) ? "Liên hệ" : error.estimatedCost;
 
         const stepsHtml = (error.diagnosisSteps || []).map(step => `<li class="mb-1.5">· ${step}</li>`).join('');
         let symptomsHtml = Array.isArray(error.symptoms) ? error.symptoms.map(item => `<li class="mb-1.5">> ${item}</li>`).join('') : `<li>${error.symptoms || 'Đang cập nhật...'}</li>`;
@@ -102,7 +102,7 @@ function displayResults(errors) {
                     
                     <div class="md:w-2/5 flex flex-col gap-4">
                         <div class="grid grid-cols-2 gap-2 w-full">
-                            <div class="tooltip tooltip-bottom md:tooltip-right z-50 flex w-full h-full" data-tip="${tooltipText}">
+                            <div class="tooltip tooltip-bottom md:tooltip-right z-20 flex w-full h-full" data-tip="${tooltipText}">
                                 <div class="w-full h-full ${diffBgColor} border font-bold text-[10px] py-2 px-2 uppercase tracking-tight cursor-help shadow-sm flex items-center justify-center gap-1 rounded-md text-center leading-snug">
                                     Mức độ: ${diffText}
                                     <svg class="w-3.5 h-3.5 opacity-80 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
