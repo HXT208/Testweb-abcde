@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Viện Tài Liệu - HHT K14</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; padding-bottom: 70px; }
+        @media (min-width: 768px) { body { padding-bottom: 0; } }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-slate-800 relative">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-lg md:text-xl font-extrabold text-red-600 tracking-tight uppercase flex items-center gap-2">
+                THƯ VIỆN TÀI LIỆU
+            </h1>
+            <button onclick="window.location.href='index.html'" class="hidden md:flex border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-red-600 rounded-lg font-bold py-1.5 px-4 transition-all items-center gap-2 text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                QUAY LẠI
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-6 md:py-8 max-w-7xl flex flex-col md:flex-row gap-6">
+        <aside class="w-full md:w-64 shrink-0 mb-2 md:mb-0">
+            <h3 class="hidden md:block text-xs font-extrabold text-slate-400 uppercase tracking-widest px-3 mb-2">Danh Mục</h3>
+            
+            <div class="flex md:flex-col gap-2 overflow-x-auto custom-scrollbar pb-2 md:pb-0 pr-4 md:pr-0">
+                <button onclick="filterDocs('all')" id="btn-cat-all" class="cat-btn shrink-0 flex justify-between items-center px-4 py-2.5 rounded-lg text-sm font-bold bg-red-50 text-red-600 border border-red-100 md:border-transparent transition-colors">
+                    Tất cả tài liệu
+                    <span class="bg-white text-red-500 text-xs py-0.5 px-2 rounded-full shadow-sm ml-2 md:ml-0" id="count-all">0</span>
+                </button>
+                <button onclick="filterDocs('phancung')" id="btn-cat-phancung" class="cat-btn shrink-0 flex justify-between items-center px-4 py-2.5 rounded-lg text-sm font-bold text-slate-600 bg-white hover:bg-slate-50 border border-slate-200 md:border-transparent transition-colors">
+                    Phần cứng
+                    <span class="bg-slate-100 text-slate-500 text-xs py-0.5 px-2 rounded-full ml-2 md:ml-0" id="count-phancung">0</span>
+                </button>
+                <button onclick="filterDocs('phanmem')" id="btn-cat-phanmem" class="cat-btn shrink-0 flex justify-between items-center px-4 py-2.5 rounded-lg text-sm font-bold text-slate-600 bg-white hover:bg-slate-50 border border-slate-200 md:border-transparent transition-colors">
+                    Phần mềm
+                    <span class="bg-slate-100 text-slate-500 text-xs py-0.5 px-2 rounded-full ml-2 md:ml-0" id="count-phanmem">0</span>
+                </button>
+                <button onclick="filterDocs('mang')" id="btn-cat-mang" class="cat-btn shrink-0 flex justify-between items-center px-4 py-2.5 rounded-lg text-sm font-bold text-slate-600 bg-white hover:bg-slate-50 border border-slate-200 md:border-transparent transition-colors">
+                    Mạng máy tính
+                    <span class="bg-slate-100 text-slate-500 text-xs py-0.5 px-2 rounded-full ml-2 md:ml-0" id="count-mang">0</span>
+                </button>
+            </div>
+        </aside>
+
+        <section class="flex-grow bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-sm">
+            <div class="flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-center mb-6 border-b border-slate-100 pb-4">
+                <h2 id="categoryTitle" class="text-lg md:text-xl font-bold text-slate-800">Tất cả tài liệu</h2>
+                <div class="relative w-full md:w-auto">
+                    <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3 md:top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="text" id="searchDoc" onkeyup="searchDocs()" placeholder="Tìm tên tài liệu..." class="w-full md:w-64 pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-red-400 focus:bg-white transition-all">
+                </div>
+            </div>
+
+            <div id="docGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+        </section>
+    </main>
+
+    <div class="btm-nav btm-nav-sm md:hidden bg-white border-t border-slate-200 z-50">
+        <button onclick="window.location.href='index.html'" class="text-slate-500 hover:text-red-600">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            <span class="btm-nav-label text-[10px] font-bold">Trang chủ</span>
+        </button>
+        <button class="active text-red-600">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+            <span class="btm-nav-label text-[10px] font-bold">Tài liệu</span>
+        </button>
+        <button onclick="window.location.href='timcuahang.html'" class="text-slate-500 hover:text-red-600">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span class="btm-nav-label text-[10px] font-bold">Cửa hàng</span>
+        </button>
+    </div>
+
+    <script>
+        const documents = [
+            { id: 1, category: "phancung", title: "Sửa chữa máy tính cơ bản", desc: "Tài liệu chi tiết về các linh kiện trên Mainboard phổ biến (Dell, HP, ASUS...).", link: "tailieu/tailieumau.pdf" },
+            { id: 2, category: "phancung", title: "Quy trình vệ sinh & Bảo trì Card đồ họa (VGA)", desc: "Hướng dẫn tháo lắp, tra keo tản nhiệt và vệ sinh các dòng Card đồ họa rời.", link: "#" },
+            { id: 3, category: "phanmem", title: "Cẩm nang cài đặt Windows 11 chuẩn UEFI", desc: "Các bước tạo USB Boot và cài đặt Windows 11 chuẩn xác nhất.", link: "tailieu/tailieumau.pdf" },
+            { id: 4, category: "mang", title: "Sơ đồ bấm dây mạng RJ45 chuẩn A và B", desc: "Hình ảnh trực quan hướng dẫn bấm cáp mạng.", link: "tailieu/tailieumau.pdf" }
+        ];
+
+        let currentFilter = 'all';
+
+        function init() {
+            document.getElementById('count-all').innerText = documents.length;
+            document.getElementById('count-phancung').innerText = documents.filter(d => d.category === 'phancung').length;
+            document.getElementById('count-phanmem').innerText = documents.filter(d => d.category === 'phanmem').length;
+            document.getElementById('count-mang').innerText = documents.filter(d => d.category === 'mang').length;
+            renderDocs(documents);
+        }
+
+        function renderDocs(data) {
+            const grid = document.getElementById('docGrid');
+            grid.innerHTML = '';
+            if(data.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center text-slate-400 py-10">Không tìm thấy tài liệu nào.</p>`;
+                return;
+            }
+            data.forEach(doc => {
+                grid.innerHTML += `
+                    <div class="group flex p-4 border border-slate-200 rounded-xl hover:border-red-300 hover:shadow-md transition-all bg-white cursor-default">
+                        <div class="mr-4 mt-1 shrink-0">
+                            <div class="p-3 bg-red-50 rounded-lg group-hover:scale-110 transition-transform text-red-500">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            </div>
+                        </div>
+                        <div class="flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-800 leading-tight mb-1 group-hover:text-red-600 transition-colors">${doc.title}</h3>
+                                <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-3">${doc.desc}</p>
+                            </div>
+                            <div class="flex justify-end mt-auto pt-3 border-t border-slate-100">
+                                <a href="${doc.link}" target="_blank" class="text-sm font-bold text-red-600 hover:text-white border border-red-600 hover:bg-red-600 px-5 py-1.5 rounded-lg transition-colors shadow-sm">MỞ</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterDocs(cat) {
+            currentFilter = cat;
+            const titles = { 'all': 'Tất cả tài liệu', 'phancung': 'Phần cứng', 'phanmem': 'Phần mềm', 'mang': 'Mạng máy tính' };
+            document.getElementById('categoryTitle').innerText = titles[cat];
+
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn shrink-0 flex justify-between items-center px-4 py-2.5 rounded-lg text-sm font-bold text-slate-600 bg-white hover:bg-slate-50 border border-slate-200 md:border-transparent transition-colors";
+                btn.querySelector('span').className = "bg-slate-100 text-slate-500 text-xs py-0.5 px-2 rounded-full ml-2 md:ml-0";
+            });
+            const activeBtn = document.getElementById('btn-cat-' + cat);
+            activeBtn.className = "cat-btn shrink-0 flex justify-between items-center px-4 py-2.5 rounded-lg text-sm font-bold bg-red-50 text-red-600 border border-red-100 md:border-transparent transition-colors";
+            activeBtn.querySelector('span').className = "bg-white text-red-500 text-xs py-0.5 px-2 rounded-full shadow-sm ml-2 md:ml-0";
+
+            let filtered = cat === 'all' ? documents : documents.filter(d => d.category === cat);
+            renderDocs(filtered);
+            document.getElementById('searchDoc').value = '';
+        }
+
+        function searchDocs() {
+            const query = document.getElementById('searchDoc').value.toLowerCase();
+            let filtered = currentFilter === 'all' ? documents : documents.filter(d => d.category === currentFilter);
+            renderDocs(filtered.filter(d => d.title.toLowerCase().includes(query)));
+        }
+
+        init();
+    </script>
+</body>
+</html>
