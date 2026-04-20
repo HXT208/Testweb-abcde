@@ -4,7 +4,7 @@ const pcErrors = [
         name: "Không lên nguồn (No Power)",
         category: "Phần cứng",
         difficulty: "Khó",
-        estimatedCost: "def",
+        estimatedCost: "0 - 100.000đ",
         symptoms: [
             "Nhấn nút nguồn không có tín hiệu. Quạt không quay, đèn LED báo nguồn không sáng.", 
         ],

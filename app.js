@@ -64,7 +64,7 @@ function displayResults(errors) {
         const audioUrl = (error.audio && error.audio !== "def" && error.audio.trim() !== '') ? error.audio : null;
         const videoUrl = (typeof error.video === 'string' && error.video.includes('http')) ? error.video.trim() : null;
 
-        const displayCost = (error.estimatedCost === "def" || !error.estimatedCost) ? "Liên hệ" : error.estimatedCost;
+        const displayCost = (error.estimatedCost === "def" || !error.estimatedCost) ? "---" : error.estimatedCost;
 
         const stepsHtml = (error.diagnosisSteps || []).map(step => `<li class="mb-1.5">· ${step}</li>`).join('');
         let symptomsHtml = Array.isArray(error.symptoms) ? error.symptoms.map(item => `<li class="mb-1.5">> ${item}</li>`).join('') : `<li>${error.symptoms || 'Đang cập nhật...'}</li>`;
@@ -113,8 +113,8 @@ function displayResults(errors) {
                                 CHI PHÍ ƯỚC TÍNH: <br class="hidden md:block"/>${displayCost}
                             </div>
 
-                            <button id="btn-img-${index}" onclick="switchMedia(${index}, 'img')" class="w-full h-full bg-red-600 text-white border border-red-600 rounded-md text-[10px] font-bold py-2 transition-all shadow-sm">📸 ẢNH</button>
-                            <button id="btn-vid-${index}" onclick="switchMedia(${index}, 'vid')" class="w-full h-full bg-white text-red-600 border border-red-200 rounded-md text-[10px] font-bold py-2 transition-all">▶️ VIDEO</button>
+                            <button id="btn-img-${index}" onclick="switchMedia(${index}, 'img')" class="w-full h-full bg-red-600 text-white border border-red-600 rounded-md text-[10px] font-bold py-2 transition-all shadow-sm">HÌNH ẢNH</button>
+                            <button id="btn-vid-${index}" onclick="switchMedia(${index}, 'vid')" class="w-full h-full bg-white text-red-600 border border-red-200 rounded-md text-[10px] font-bold py-2 transition-all">VIDEO</button>
                         </div>
 
                         <div class="rounded-lg shadow-inner bg-slate-200 border border-slate-300 flex items-center justify-center aspect-video w-full relative overflow-hidden" id="media-container-${index}">
@@ -134,7 +134,7 @@ function displayResults(errors) {
                         </div>
                         
                         <div class="bg-white rounded-lg border border-red-100 p-2 shadow-sm">
-                            ${audioUrl ? `<audio controls class="w-full h-8"><source src="${audioUrl}" type="audio/mpeg"></audio>` : `<p class="text-slate-400 text-[11px] italic text-center mt-1">Không có âm thanh chẩn đoán</p>`}
+                            ${audioUrl ? `<audio controls class="w-full h-8"><source src="${audioUrl}" type="audio/mpeg"></audio>` : `<p class="text-slate-400 text-[11px] italic text-center mt-1">Không có âm thanh</p>`}
                         </div>
                     </div>
 
