@@ -134,7 +134,7 @@ function displayResults(errors) {
                         </div>
                         
                         <div class="bg-white rounded-lg border border-red-100 p-2 shadow-sm">
-                            ${audioUrl ? `<audio controls class="w-full h-8"><source src="${audioUrl}" type="audio/mpeg"></audio>` : `<p class="text-slate-400 text-[11px] italic text-center mt-1">Không có âm thanh</p>`}
+                            ${audioUrl ? `<audio controls class="w-full h-8"><source src="${audioUrl}" type="audio/mpeg"></audio>` : `<p class="text-slate-400 text-[11px] italic text-center mt-1">Không có âm thanh chẩn đoán</p>`}
                         </div>
                     </div>
 
