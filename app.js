@@ -139,8 +139,6 @@ function displayResults(errors) {
                     </div>
 
                     <div class="md:w-3/5 flex flex-col relative">
-                        <div class="timeline-line"></div> 
-
                         <div class="space-y-6">
                             <div class="timeline-item">
                                 <div class="timeline-icon"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
@@ -188,7 +186,7 @@ window.printErrorBlock = function(divId, errorName) {
                 ul { padding-left: 20px; margin-top: 5px; font-size: 14px;}
                 li { margin-bottom: 8px; }
                 button, svg, .tooltip::before, .tooltip::after { display: none !important; }
-                .timeline-line, .timeline-icon { display: none; }
+                .timeline-item::after, .timeline-icon { display: none !important; }
                 .timeline-item { padding-left: 0; }
                 .grid { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
                 .grid > div { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid #cbd5e1; background: #f1f5f9; }
